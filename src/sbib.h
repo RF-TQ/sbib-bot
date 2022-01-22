@@ -10,17 +10,17 @@
 static const size_t SIZE = 11;
 static const std::string responses[SIZE] = 
     {
-        ":sbibo:", 
-        ":sbiboleft:",
+        "<:sbibo:864916773186175036>", 
+        "<:sbiboleft:864916822679486484>",
         "A shizuku may appear if you do",
         "Yes, but you could sbib instead"
         "It would be better to sbib",
         "Outlook sbib",
-        ":sbibo: :thumbsup: !!!"
+        "<:sbibo:864916773186175036> 👍 !!!"
         "Only if you roll a sbib"
-        "No, but have a sbib in these trying times :sbibo:"
+        "No, but have a sbib in these trying times <:sbibo:864916773186175036>"
         "If you sbib, it will happen"
-        ":sbiboangery: "
+        "<:sbiboangery:864916789258747946>"
     };
 
-#endif
+#endif 
