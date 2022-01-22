@@ -14,6 +14,9 @@ int main()
     // Writes back to the console when the bot successfully connects
     bot.on_ready([&bot](const auto & event) {
         std::cout << "Logged in as " << bot.me.username << "\n";
+        
+        // see cmd_data.name == "sbib-ball" for context
+        srand(time(NULL));
 
         // Init for slash commands
         dpp::slashcommand eightball;        
@@ -36,12 +39,12 @@ int main()
             if (cmd_data.name == "sbib-ball") {
                 // Do something with this later on
                 // std::string query = std::get<std::string>(event.get_parameter("question"));
-                if (event.comm)
-                
-                std::default_random_engine generator;
-                std::uniform_int_distribution<int> distr(0, SIZE - 1);
 
-                std::string response = responses[distr(generator)];
+                // I probably misread the docs on this considering it only ever outputs responses[0]                
+                // std::default_random_engine generator;
+                // std::uniform_int_distribution<int> distr(0, SIZE - 1);
+
+                std::string response = responses[rand() % 11];
 
                 event.reply(dpp::ir_channel_message_with_source, response);
             }
@@ -52,7 +55,8 @@ int main()
     // and replies in the same channel as the message if that string matches.
     // NOTE: Uses the Message Content intent, although that won't be relevant since this only runs on two guilds
     bot.on_message_create([&bot](const auto & event) {
-        if (event.msg.content == "!ping sbib") {
+        // Does this need the identify scope to ping back the user who initiated the event?
+        if (event.msg.content == "?ping sbib") {
             bot.message_create(dpp::message(event.msg.channel_id, "<:sbiboping:911528061407744000>"));
         }
         else if (event.msg.content == "hi sbib") {

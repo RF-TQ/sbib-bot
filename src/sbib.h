@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <random>
+#include <cstdlib>
+#include <ctime>
 #include <string>
 #include <dpp/dpp.h>
 #include <dpp/fmt/format.h>
