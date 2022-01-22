@@ -20,8 +20,6 @@ int main()
             .set_application_id(bot.me.id)
             .add_option(
                 dpp::command_option(dpp::co_string, "question", "Ask a question", true).
-                )
-            )
         );
 
         bot.global_command_create(eightball);

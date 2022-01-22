@@ -21,6 +21,6 @@ static const std::string responses[SIZE] =
         "No, but have a sbib in these trying times :sbibo:"
         "If you sbib, it will happen"
         ":sbiboangery: "
-    }
+    };
 
 #endif
