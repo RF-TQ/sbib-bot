@@ -2,6 +2,8 @@
 
 int main()
 {
+    setenv("DISCORD_TOKEN", /* token omitted */, 1);
+
 	if (!getenv("TOKEN")) {
 		std::cout << "Could not find the DISCORD_TOKEN environment variable.\n";
 		return 1;
@@ -32,7 +34,9 @@ int main()
             
             // eightball: produces a random response from a predefined string array
             if (cmd_data.name == "sbib-ball") {
-                std::string query = std::get<std::string>(event.get_parameter("question"));
+                // Do something with this later on
+                // std::string query = std::get<std::string>(event.get_parameter("question"));
+                if (event.comm)
                 
                 std::default_random_engine generator;
                 std::uniform_int_distribution<int> distr(0, SIZE - 1);
@@ -49,7 +53,13 @@ int main()
     // NOTE: Uses the Message Content intent, although that won't be relevant since this only runs on two guilds
     bot.on_message_create([&bot](const auto & event) {
         if (event.msg.content == "!ping sbib") {
-            bot.message_create(dpp::message(event.msg.channel_id, ":Sbibo:"));
+            bot.message_create(dpp::message(event.msg.channel_id, "<:sbiboping:911528061407744000>"));
+        }
+        else if (event.msg.content == "hi sbib") {
+            bot.message_create(dpp::message(event.msg.channel_id, "<:sbibosmile:864916840752349204>"));
+        }
+        else if (event.msg.content == "sbib?") {
+            bot.message_create(dpp::message(event.msg.channel_id, "<:sbibo:864916773186175036> !"));
         }
     });
 
