@@ -4,12 +4,12 @@ int main()
 {
     setenv("DISCORD_TOKEN", /* token omitted */, 1);
 
-	if (!getenv("TOKEN")) {
+	if (!getenv("DISCORD_TOKEN")) {
 		std::cout << "Could not find the DISCORD_TOKEN environment variable.\n";
 		return 1;
 	}
 
-    dpp::cluster bot(getenv("TOKEN"));
+    dpp::cluster bot(getenv("DISCORD_TOKEN"));
     
     // Writes back to the console when the bot successfully connects
     bot.on_ready([&bot](const auto & event) {
