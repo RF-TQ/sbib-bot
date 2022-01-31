@@ -9,7 +9,7 @@ int main()
 		return 1;
 	}
 
-    dpp::cluster bot(getenv("TOKEN"));
+    dpp::cluster bot(getenv("DISCORD_TOKEN"));
     
   // Writes back to the console when the bot successfully connects
   bot.on_ready([&bot](const auto & event) {
