@@ -4,7 +4,7 @@
 #include <iostream>
 #include <random>
 #include <string>
-#include <stdlib.h>
+#include <cstdlib>
 #include <ctime>
 #include <dpp/dpp.h>
 #include <dpp/fmt/format.h>

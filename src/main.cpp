@@ -11,33 +11,36 @@ int main()
 
     dpp::cluster bot(getenv("DISCORD_TOKEN"));
     
-  // Writes back to the console when the bot successfully connects
-  bot.on_ready([&bot](const auto & event) {
-    std::cout << "Logged in as " << bot.me.username << "\n";
+    // Writes back to the console when the bot successfully connects
+    bot.on_ready([&bot](const auto & event) {
         
-    srand(time(NULL)); 
+        std::cout << "Logged in as " << bot.me.username << "\n";
+            
+        // See sbib.cpp::handle_8ball() for context
+        srand(time(NULL)); 
 
-    // Init for slash commands
-    init_8ball(bot);
-    init_textquest();
+        // Init for slash commands
+        init_8ball(bot);
+        init_textquest(bot);
             
     });
 
     // Interaction handler for slash commands
-  bot.on_interaction_create([&bot](const dpp::interaction_create_t &event) {
-    if (event.command.type == dpp::it_application_command) {
-      dpp::command_interaction cmd_data = std::get<dpp::command_interaction>(event.command.data);
-            
-      // eightball: produces a random response from a predefined string array
-      if (cmd_data.name == "sbib-ball") {
-        handle_8ball(event);
-        }
+    bot.on_interaction_create([&bot](const dpp::interaction_create_t &event) {
+        
+        if (event.command.type == dpp::it_application_command) {
+        dpp::command_interaction cmd_data = std::get<dpp::command_interaction>(event.command.data);
+                
+        // eightball: produces a random response from a predefined string array
+        if (cmd_data.name == "sbib-ball") {
+            handle_8ball(event);
+            }
 
-      // textquest: logs commands to console and keeps a running counter of commands by type
-      if (cmd_data.name == "sbib-quest") {
-        handle_textquest(event, cmd_data, true);    
+        // textquest: logs commands to console and keeps a running counter of commands by type
+        if (cmd_data.name == "sbib-quest") {
+            handle_textquest(event, cmd_data, true);    
+            }
         }
-      }
     });    
   
     // When a message is sent, listens for a certain string,

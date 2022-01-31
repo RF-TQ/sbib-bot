@@ -47,67 +47,67 @@ void init_textquest(dpp::cluster & bot)
 // Handler for sbib-ball slash command
 void handle_8ball(const dpp::interaction_create_t & event)
 {
-  // Do something with this later on
-  // Doesn't this return the value of the query, as in 
-  // question: "Will I lucksack on the next fes?"
-  // std::string query = std::get<std::string>(event.get_parameter("question"));
-                
-  // I probably misread the docs on this considering it only ever outputs responses[0]   
-  // std::default_random_engine generator;
-  // std::uniform_int_distribution<int> distr(0, SIZE - 1);
+    // Do something with this later on
+    // Doesn't this return the value of the query, as in 
+    // question: "Will I lucksack on the next fes?"
+    // std::string query = std::get<std::string>(event.get_parameter("question"));
+                    
+    // I probably misread the docs on this considering it only ever outputs responses[0]   
+    // std::default_random_engine generator;
+    // std::uniform_int_distribution<int> distr(0, SIZE - 1);
 
-  std::string response = responses[rand() % 12];
+    std::string response = responses[rand() % 12];
 
-  event.reply(dpp::ir_channel_message_with_source, response);
+    event.reply(dpp::ir_channel_message_with_source, response);
 
-  return;
+    return;
 }
 
 // handle_textquest()
 // Handler for sbib-quest slash command
 void handle_textquest(const dpp::interaction_create_t & event, const dpp::command_interaction & cmd_data, bool is_valid_command)
 {
-  if (cmd_data.options[0].name == "command") {
+    if (cmd_data.options[0].name == "command") {
 
-    if (cmd_data.options[0].options.size() <= 0) {
-        is_valid_command = false;
+        // Validation check: Must use one of the four options
+        if (cmd_data.options[0].options.size() <= 0) {
+            is_valid_command = false;
+        }
+
+        if (is_valid_command == false){
+            event.reply(dpp::ir_channel_message_with_source, "Command invalid! Try again.");
+            return;
+        }        
+        else {
+            std::string turn_action = std::get<std::string>(cmd_data.options[0].options[0].value);
+
+            std::cout << "Command received: " 
+                    << turn_action << '\n';
+
+            event.reply(dpp::ir_channel_message_with_source, "Command logged!");
+
+            // This is going to require some sort of class to keep count of each interaction type
+            // For now, logging the action type to the console will do
+            if (cmd_data.options[0].options[0].name == "interact") {
+                std::cout << "Command type: interaction\n";
+            }
+            else if (cmd_data.options[0].options[0].name == "use-item") {
+                std::cout << "Command type: item usage\n";
+            }
+            else if (cmd_data.options[0].options[0].name == "exit") {
+                std::cout << "Command type: area movement\n";
+            }
+            else if (cmd_data.options[0].options[0].name == "wildcard") {
+                std::cout << "Command type: special\n";
+            }
+        }
+
     }
+    else if (cmd_data.options[0].name == "turn") {
+        // Probably needs a class as well
+        event.reply(dpp::ir_channel_message_with_source, "Current turn data unavailable.");
+    } 
 
-    if (is_valid_command == false){
-        event.reply(dpp::ir_channel_message_with_source, "Command invalid! Try again.");
-        return;
-    }
-    
-    else {
-        std::string turn_action = std::get<std::string>(cmd_data.options[0].options[0].value);
-
-        std::cout << "Command received: " 
-                  << turn_action << '\n';
-
-        event.reply(dpp::ir_channel_message_with_source, "Command logged!");
-
-        // This is going to require some sort of class to keep count of each interaction type
-        // For now, logging the action type to the console will do
-        if (cmd_data.options[0].options[0].name == "interact") {
-            std::cout << "Command type: interaction\n";
-        }
-        else if (cmd_data.options[0].options[0].name == "use-item") {
-            std::cout << "Command type: item usage\n";
-        }
-        else if (cmd_data.options[0].options[0].name == "exit") {
-            std::cout << "Command type: area movement\n";
-        }
-        else if (cmd_data.options[0].options[0].name == "wildcard") {
-            std::cout << "Command type: special\n";
-        }
-    }
-
-  }
-  else if (cmd_data.options[0].name == "turn") {
-      // Probably needs a class as well
-      event.reply(dpp::ir_channel_message_with_source, "Current turn data unavailable.");
-  } 
-
-  return;
+    return;
 
 }
