@@ -63,6 +63,8 @@ void handle_8ball(const dpp::interaction_create_t & event)
     return;
 }
 
+// For whatever reason, this slash command isn't detected even when signed into sekaicord.
+// Did something change about slash commands or did you do something to turn this off?
 // handle_textquest()
 // Handler for sbib-quest slash command
 void handle_textquest(const dpp::interaction_create_t & event, const dpp::command_interaction & cmd_data, bool is_valid_command)

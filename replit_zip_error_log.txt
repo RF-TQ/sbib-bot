@@ -1,0 +1,1 @@
+{"error":".zip archives do not support non-regular files","level":"error","msg":"unable to write file usr/lib/libdpp.so","time":"2023-09-08T20:13:35Z"}
